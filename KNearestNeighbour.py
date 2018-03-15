@@ -34,7 +34,7 @@ def dist(v1, v2, length):
 
 def neighbours(v, data, k):
     """
-
+    finds the nearest k neighbours to a given vector based on given data
     :param v: point of concern
     :param data: dataset of all points
     :param k: number of neighbours to calculate
@@ -57,4 +57,3 @@ if __name__ == '__main__':
     train_file = 'ass1-data/part1/iris-training.txt'
     test_file = 'ass1-data/part1/iris-test.txt'
     main(train_file, test_file)
-
