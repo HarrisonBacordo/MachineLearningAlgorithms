@@ -40,6 +40,22 @@ def neighbours(v, data, k):
     :param k: number of neighbours to calculate
     :return: list of neighbours
     """
+    dist_list = []
+    for v2 in data:
+        dist_list.append(dist(v, v2, 4))
+    i = 0
+    current_min = {}
+    min_list = []
+    while len(min_list) <= k:
+        for d in dist_list:
+            if i == 0:
+                current_min = {i: d}
+            elif d <= current_min[0]:
+                current_min = {i: d}
+            i += 1
+        index = next(iter(current_min))
+        dist_list.remove(index)
+        min_list.append(index)
 
 
 def main(train, test):
