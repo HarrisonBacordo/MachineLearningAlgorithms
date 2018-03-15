@@ -1,36 +1,60 @@
-def prep_data(file, split, training=None, test=None):
+import csv
+import math
+
+
+def prep_data(training, test):
     """
     Correctly format the dataset to conform to the machine learning model
-    :param file: filename of dataset
-    :param split: how to split dataset b/t training and test
     :param training: list of training data
     :param test: list of test data
     :return: None
     """
-    if training is None:
-        training = []
-    if test is None:
-        test = []
+    with open(training, 'rt') as csvfile:
+        lines = csv.reader(csvfile)
+        training_data = list(lines)
+    with open(test, 'rt') as csvfile:
+        lines = csv.reader(csvfile)
+        test_data = list(lines)
+    return training_data, test_data
 
 
-def dist(p1, p2,):
+def dist(v1, v2, length):
     """
-    Calculates the distance between two pieces of data
-    :param p1: first data piece
-    :param p2: second data piece
+    Calculates the euclidean distance between two vectors
+    :param v1: first data piece
+    :param v2: second data piece
+    :param length: amount of numbers in each vector
     :return: distance
     """
+    distance = 0
+    for x in range(length):
+        distance += pow((v1[x] - v2[x]), 2)
+    return math.sqrt(distance)
 
 
-def neighbours(p, data, k):
+def neighbours(v, data, k):
     """
 
-    :param p: point of concern
+    :param v: point of concern
     :param data: dataset of all points
     :param k: number of neighbours to calculate
     :return: list of neighbours
     """
 
 
-train_file = 'ass1-data/part1/iris-training.txt'
-test_file = 'ass1-data/part1/iris-test.txt'
+def main(train, test):
+    training_data, test_data = prep_data(train, test)
+    # test for train and test format
+    print("TRAIN: ", training_data)
+    print("TEST: ", test_data)
+    # test for euclidean distance
+    x = [4, 4, 4, 4, 'string']
+    y = [8, 8, 8, 8, 'string']
+    print(dist(x, y, 4))
+
+
+if __name__ == '__main__':
+    train_file = 'ass1-data/part1/iris-training.txt'
+    test_file = 'ass1-data/part1/iris-test.txt'
+    main(train_file, test_file)
+
