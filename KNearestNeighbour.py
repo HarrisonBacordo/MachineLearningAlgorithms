@@ -27,8 +27,10 @@ def dist(v1, v2, length):
     :return: distance
     """
     distance = 0
+    if not v1 or not v2:
+        return
     for x in range(length):
-        distance += pow((v1[x] - v2[x]), 2)
+        distance += pow((float(v1[0][5 * x:5 * x + 3]) - float(v2[0][5 * x:5 * x + 3])), 2)
     return math.sqrt(distance)
 
 
@@ -42,20 +44,29 @@ def neighbours(v, data, k):
     """
     dist_list = []
     for v2 in data:
-        dist_list.append(dist(v, v2, 4))
-    i = 0
-    current_min = {}
+        distance = dist(v, v2, 4)
+        if distance is not None:
+            dist_list.append(distance)
     min_list = []
+    min_index_list = []
     while len(min_list) <= k:
+        i = 0
+        min_index = 0
+        min_val = 0
         for d in dist_list:
+            print(i, d)
             if i == 0:
-                current_min = {i: d}
-            elif d <= current_min[0]:
-                current_min = {i: d}
+                min_index = 0
+                min_val = d
+            elif d <= min_val:
+                min_index = i
+                min_val = d
             i += 1
-        index = next(iter(current_min))
-        dist_list.remove(index)
-        min_list.append(index)
+        del dist_list[min_index]
+        min_index_list.append(min_index)
+        min_list.append(min_val)
+    #     TODO potential index shift problem when deleting
+    return min_index_list, min_list
 
 
 def main(train, test):
@@ -64,9 +75,8 @@ def main(train, test):
     print("TRAIN: ", training_data)
     print("TEST: ", test_data)
     # test for euclidean distance
-    x = [4, 4, 4, 4, 'string']
-    y = [8, 8, 8, 8, 'string']
-    print(dist(x, y, 4))
+    # test for finding k nearest neighbours
+    print(neighbours(test_data[0], training_data, 3))
 
 
 if __name__ == '__main__':
