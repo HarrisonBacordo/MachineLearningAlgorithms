@@ -1,5 +1,6 @@
 import csv
 import math
+import numpy as np
 
 
 def prep_data(training, test):
@@ -34,7 +35,7 @@ def dist(v1, v2, length):
     return math.sqrt(distance)
 
 
-def neighbours(v, data, k):
+def eval_neighbours(v, data, k):
     """
     finds the nearest k neighbours to a given vector based on given data
     :param v: point of concern
@@ -47,36 +48,32 @@ def neighbours(v, data, k):
         distance = dist(v, v2, 4)
         if distance is not None:
             dist_list.append(distance)
-    min_list = []
-    min_index_list = []
-    while len(min_list) <= k:
-        i = 0
-        min_index = 0
-        min_val = 0
-        for d in dist_list:
-            print(i, d)
-            if i == 0:
-                min_index = 0
-                min_val = d
-            elif d <= min_val:
-                min_index = i
-                min_val = d
-            i += 1
-        del dist_list[min_index]
-        min_index_list.append(min_index)
-        min_list.append(min_val)
-    #     TODO potential index shift problem when deleting
-    return min_index_list, min_list
+    neigh_index = np.argpartition(np.array(dist_list), k)[:k].tolist()
+    neighbours = []
+    for index in neigh_index:
+        neighbours.append(data[index][0])
+    return neighbours
+
+
+def predict(neighbours):
+    score = {}
+    for n in neighbours:
+        label = str(n).rsplit(' ', 1)[1]
+        if label in score:
+            score[label] += 1
+        else:
+            score[label] = 1
+    return max(score, key=score.get)
 
 
 def main(train, test):
     training_data, test_data = prep_data(train, test)
-    # test for train and test format
-    print("TRAIN: ", training_data)
-    print("TEST: ", test_data)
-    # test for euclidean distance
-    # test for finding k nearest neighbours
-    print(neighbours(test_data[0], training_data, 3))
+    i = 1
+    for row in test_data:
+        neighbours = eval_neighbours(row, training_data, 1)
+        if neighbours:
+            print(i, predict(neighbours))
+            i += 1
 
 
 if __name__ == '__main__':

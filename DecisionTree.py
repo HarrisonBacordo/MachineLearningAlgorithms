@@ -11,3 +11,18 @@ def prep_data(file, split, training=None, test=None):
         training = []
     if test is None:
         test = []
+
+
+def build_tree(instance, attr):
+    """
+    :param instance:
+    :param attr:
+    :return:
+    """
+
+
+def main(file1, file2):
+    return
+
+if __name__ == '__main__':
+    main('ass1-data/part2/hepatitis-training.dat', 'ass1-data/part2/hepatitis-test.dat')
