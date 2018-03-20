@@ -1,5 +1,6 @@
 import random
 import numpy as np
+import operator as op
 
 
 class Feature:
@@ -58,7 +59,7 @@ def prep_data(file):
         if labels[i] == "Yes":
             labels[i] = 1
         else:
-            labels[i] = 0
+            labels[i] = -1
     print(labels)
 
     return imgs, labels
@@ -79,6 +80,13 @@ def construct_features(w, h, n):
 
 
 def feature_values(feats, imgs):
+    """
+    Convert each img into its appropriate feature values to be used as inputs for
+    the perceptron
+    :param feats: feature objects
+    :param imgs: imgages in binary
+    :return: list of all feature values for each img
+    """
     img_bools = []
     all_img_bools = []
     for img in imgs:
@@ -98,11 +106,11 @@ def feature_values(feats, imgs):
 
 
 def initialize_weights():
-    weights = list()
-    for i in range(51):
-        weights.append(float(random.uniform(-1, 1)))
-        print(weights)
-    return weights
+    """
+    give weights ar andom value between
+    :return:
+    """
+    return [0.0 for i in range(51)]
 
 
 # TODO Add necessary args as you progress
@@ -114,7 +122,7 @@ def feed_forward(features, weights, activation, epoch_num):
     total = 0
     for i in range(len(features)):
         total += features[i] * weights[i]
-    return 1 if total >= 0 else 0
+    return 1 if total > 0 else -1
 
 
 def calculate_cost(label, prediction):
@@ -130,7 +138,7 @@ def minimize_cost(weights, cost, learn_rate, label):
     Initiate back propagation; Change the weights connected to the perceptron according to stochastic gradient descent
     :return:
     """
-    for i in range(len(weights)):
+    for i in range(len(weights)-1):
         weights[i] = weights[i] + learn_rate * cost * label
     return weights
 
@@ -148,8 +156,10 @@ def main(file):
         for i in range(100):
             guess = feed_forward(imgs[i], weights, None, None)
             if guess != labels[i]:
-                cost = calculate_cost(labels[i], guess)
-                minimize_cost(weights, cost, 0.01, labels[i])
+                if guess == 1:
+                    weights = weights - imgs[i]
+                else:
+                    weights = weights + imgs[i]
             else:
                 correct += 1
         print(epoch, correct)
