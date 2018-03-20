@@ -162,7 +162,10 @@ def main(file):
                     weights = weights + imgs[i]
             else:
                 correct += 1
-        print(epoch, correct)
+        print("CYCLE: ", epoch, " CORRECT: ", correct, " OUT OF: 100")
+    print("\nCONVERGED WEIGHTS: ", weights)
+    for i, feature in enumerate(features):
+        print("\nFEATURE ", i, "\nROW: ", feature.row, "\nCOL: ", feature.col, "\nBOOLS: ", feature.connected)
 
 
 if __name__ == '__main__':
