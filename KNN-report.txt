@@ -1,0 +1,177 @@
+1. CLASS LABELS FOR K = 1:
+ACCURACY: 94.7%
+1 Iris-setosa
+2 Iris-setosa
+3 Iris-setosa
+4 Iris-setosa
+5 Iris-setosa
+6 Iris-setosa
+7 Iris-setosa
+8 Iris-setosa
+9 Iris-setosa
+10 Iris-setosa
+11 Iris-setosa
+12 Iris-setosa
+13 Iris-setosa
+14 Iris-setosa
+15 Iris-setosa
+16 Iris-setosa
+17 Iris-setosa
+18 Iris-setosa
+19 Iris-setosa
+20 Iris-setosa
+21 Iris-setosa
+22 Iris-setosa
+23 Iris-setosa
+24 Iris-setosa
+25 Iris-setosa
+26 Iris-versicolor
+27 Iris-versicolor
+28 Iris-versicolor
+29 Iris-versicolor
+30 Iris-versicolor
+31 Iris-versicolor
+32 Iris-versicolor
+33 Iris-versicolor
+34 Iris-virginica
+35 Iris-versicolor
+36 Iris-versicolor
+37 Iris-versicolor
+38 Iris-versicolor
+39 Iris-versicolor
+40 Iris-versicolor
+41 Iris-versicolor
+42 Iris-versicolor
+43 Iris-versicolor
+44 Iris-versicolor
+45 Iris-versicolor
+46 Iris-versicolor
+47 Iris-versicolor
+48 Iris-versicolor
+49 Iris-versicolor
+50 Iris-versicolor
+51 Iris-virginica
+52 Iris-virginica
+53 Iris-versicolor
+54 Iris-virginica
+55 Iris-virginica
+56 Iris-virginica
+57 Iris-virginica
+58 Iris-virginica
+59 Iris-versicolor
+60 Iris-virginica
+61 Iris-virginica
+62 Iris-virginica
+63 Iris-virginica
+64 Iris-versicolor
+65 Iris-virginica
+66 Iris-virginica
+67 Iris-virginica
+68 Iris-virginica
+69 Iris-virginica
+70 Iris-virginica
+71 Iris-virginica
+72 Iris-virginica
+73 Iris-virginica
+74 Iris-virginica
+75 Iris-virginica
+
+
+2. CLASS LABELS FOR K = 3:
+ACCURACY: 92%
+1 Iris-setosa
+2 Iris-setosa
+3 Iris-setosa
+4 Iris-setosa
+5 Iris-setosa
+6 Iris-setosa
+7 Iris-setosa
+8 Iris-setosa
+9 Iris-setosa
+10 Iris-setosa
+11 Iris-setosa
+12 Iris-setosa
+13 Iris-setosa
+14 Iris-setosa
+15 Iris-setosa
+16 Iris-setosa
+17 Iris-setosa
+18 Iris-setosa
+19 Iris-setosa
+20 Iris-setosa
+21 Iris-setosa
+22 Iris-setosa
+23 Iris-setosa
+24 Iris-setosa
+25 Iris-setosa
+26 Iris-versicolor
+27 Iris-versicolor
+28 Iris-virginica
+29 Iris-versicolor
+30 Iris-versicolor
+31 Iris-versicolor
+32 Iris-versicolor
+33 Iris-versicolor
+34 Iris-virginica
+35 Iris-versicolor
+36 Iris-versicolor
+37 Iris-versicolor
+38 Iris-versicolor
+39 Iris-versicolor
+40 Iris-versicolor
+41 Iris-versicolor
+42 Iris-versicolor
+43 Iris-versicolor
+44 Iris-versicolor
+45 Iris-versicolor
+46 Iris-versicolor
+47 Iris-versicolor
+48 Iris-versicolor
+49 Iris-versicolor
+50 Iris-versicolor
+51 Iris-virginica
+52 Iris-versicolor
+53 Iris-versicolor
+54 Iris-virginica
+55 Iris-virginica
+56 Iris-virginica
+57 Iris-virginica
+58 Iris-virginica
+59 Iris-versicolor
+60 Iris-virginica
+61 Iris-virginica
+62 Iris-virginica
+63 Iris-virginica
+64 Iris-versicolor
+65 Iris-virginica
+66 Iris-virginica
+67 Iris-virginica
+68 Iris-virginica
+69 Iris-virginica
+70 Iris-virginica
+71 Iris-virginica
+72 Iris-virginica
+73 Iris-virginica
+74 Iris-virginica
+75 Iris-virginica
+
+The k = 1 model performed better than the k = 3 model. This may be due to instances that are near the classifier line
+between two different classes, leading it to potentially pick up more neighbours of the wrong class.
+
+3. The main advantages of k-nearest neighbour is that it can remain very accurate in cases with multiple classes (versus
+a linear regression model). It is also quite simple to understand and implement yourself. Some disadvantages include the
+inefficient search method for the nearest neighbours (having to get distances of all points, regardless of how far it
+may be), as well as the problem of figuring out the most ideal k value
+
+4. first, I would take the overall data file (not the training and test files, but iris.data itself) and shuffle the rows
+as to distribute each label evenly. Next, I would create two lists, one for test sets and the other for training sets.
+I would divide the dataset into k equal parts, and use add each part to the list of test sets. I would then take whatever
+was the remainder of the dataset for each of the test sets and add that to the appropriate index in the training set list.
+From there you are able to test the model k times with different tests and training data every time.
+
+5. I would use k-means. First decide have k = 3 since there are 3 clusters in the dataset. Next, select k points and random,
+and set them to be the centroids (center of the clusters). They dont have to be existing points in the dataset. Next,
+create a cluster by assigning each data point in the data set to the nearest centroid using euclidean distance. Next,
+find the center position for each of the clusters, and move the appropriate centroid to that position. Next, reassign the
+data points to the new closest centroid. If reassignment was needed, find the center position of the cluster again and move
+the centroid there. Once reassignment is not needed, the model is fit.
