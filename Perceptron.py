@@ -1,4 +1,5 @@
 import random
+import numpy as np
 
 
 class Feature:
@@ -18,20 +19,49 @@ class Feature:
         if row is None:
             self.row = []
         for _ in range(4):
-            self.row.append(random.randint(1, w))
-            self.col.append(random.randint(1, h))
-            self.connected.append(random.choice([True, False]))
+            self.row.append(random.randint(1, w - 1))
+            self.col.append(random.randint(1, h - 1))
+            self.connected.append(random.choice([0, 1]))
 
 
 def prep_data(file):
     """
     Correctly format the dataset to conform to the machine learning model
     :param file: filename of dataset
-    :return: None
+    :return: 2d array of pixels as well as appropriate labels
     """
-    training = []
-    #     LOGIC HERE
-    return training
+    pixels = []
+    labels = []
+    data = open(file, 'r')
+    data = ''.join(data)
+    data = data.replace('#', '')
+    data = data.replace('P1', '')
+    data = data.replace('10 10', '')
+    data = data.replace('\n\n', '\n')
+    data = data.splitlines()
+    data.remove('')
+    current_num = []
+    for i in data:
+        if i.isalpha():
+            if current_num:
+                pixels.append(''.join(current_num[0]) + ''.join(current_num[1]))
+                current_num = []
+            labels.append(i)
+        elif i.isnumeric():
+            current_num.append(i)
+    pixels.append(''.join(current_num[0]) + ''.join(current_num[1]))
+    imgs = []
+    for i in pixels:
+        px = np.array(list(i)).reshape(10, 10)
+        imgs.append(px)
+    for i in range(len(labels)):
+        if labels[i] == "Yes":
+            labels[i] = 1
+        else:
+            labels[i] = 0
+    print(labels)
+
+    return imgs, labels
 
 
 def construct_features(w, h, n):
@@ -48,12 +78,43 @@ def construct_features(w, h, n):
     return feature_list
 
 
+def feature_values(feats, imgs):
+    img_bools = []
+    all_img_bools = []
+    for img in imgs:
+        for f in feats:
+            total = 0
+            for i in range(4):
+                if int(img[f.row[i], f.col[i]]) == f.connected[i]:
+                    total += 1
+            if total >= 3:
+                img_bools.append(1)
+            else:
+                img_bools.append(0)
+        all_img_bools.append(img_bools)
+        img_bools = []
+    all_img_bools = np.array(all_img_bools)
+    return all_img_bools
+
+
+def initialize_weights():
+    return [0.0 for i in range(51)]
+
+
 # TODO Add necessary args as you progress
-def feed_forward(features, activation, epoch_num):
+def feed_forward(features, weights, activation, epoch_num):
     """
     let data flow through the perceptron and through an activation function to output a prediction.
     :return: the prediction
     """
+    total = 0
+    for i in range(len(features)):
+        total += features[i] * weights[i]
+    total += 1 * weights[50]  # dummy
+    if total > 0:
+        return 1
+    else:
+        return 0
 
 
 def calculate_cost():
@@ -71,10 +132,25 @@ def minimize_cost():
 
 
 def main(file):
-    training_set = prep_data(file)
+    imgs, labels = prep_data(file)
     features = construct_features(10, 10, 50)
-    for feature in features:
-        print("COL: ", feature.col, "\nROW: ", feature.row, "\nBOOL", feature.connected, "\n")
+    imgs = feature_values(features, imgs)
+    weights = initialize_weights()
+    correct = 0
+    epoch = 0
+    while correct != 100:
+        correct = 0
+        epoch += 1
+        for i in range(100):
+            guess = feed_forward(imgs[i], weights, None, None)
+            if guess != labels[i]:
+                if guess == 0:
+                    correct = correct
+                else:
+                    correct = correct
+            else:
+                correct += 1
+        print(epoch, correct)
 
 
 if __name__ == '__main__':

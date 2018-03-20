@@ -70,7 +70,7 @@ def main(train, test):
     training_data, test_data = prep_data(train, test)
     i = 1
     for row in test_data:
-        neighbours = eval_neighbours(row, training_data, 1)
+        neighbours = eval_neighbours(row, training_data, 3)
         if neighbours:
             print(i, predict(neighbours))
             i += 1
