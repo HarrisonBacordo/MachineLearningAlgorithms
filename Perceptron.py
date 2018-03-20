@@ -76,6 +76,10 @@ def main(file):
     for feature in features:
         print("COL: ", feature.col, "\nROW: ", feature.row, "\nBOOL", feature.connected, "\n")
 
+#     while cost is still higher than some number
+#       feed forward training data
+#       calculate cost of prediction
+#       minimize cost via gradient descent
 
 if __name__ == '__main__':
     filename = 'ass1-data/part3/image.data'
