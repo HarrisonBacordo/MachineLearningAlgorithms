@@ -82,12 +82,12 @@ def feature_values(feats, imgs):
     img_bools = []
     all_img_bools = []
     for img in imgs:
-        for f in feats:
+        for i, f in enumerate(feats):
             total = 0
-            for i in range(4):
-                if int(img[f.row[i], f.col[i]]) == f.connected[i]:
+            for j in range(4):
+                if int(img[f.row[j], f.col[j]]) == f.connected[j]:
                     total += 1
-            if total >= 3:
+            if total >= 3 or i == 50:
                 img_bools.append(1)
             else:
                 img_bools.append(0)
@@ -98,7 +98,11 @@ def feature_values(feats, imgs):
 
 
 def initialize_weights():
-    return [0.0 for i in range(51)]
+    weights = list()
+    for i in range(51):
+        weights.append(float(random.uniform(-1, 1)))
+        print(weights)
+    return weights
 
 
 # TODO Add necessary args as you progress
@@ -110,30 +114,30 @@ def feed_forward(features, weights, activation, epoch_num):
     total = 0
     for i in range(len(features)):
         total += features[i] * weights[i]
-    total += 1 * weights[50]  # dummy
-    if total > 0:
-        return 1
-    else:
-        return 0
+    return 1 if total >= 0 else 0
 
 
-def calculate_cost():
+def calculate_cost(label, prediction):
     """
     Calculates the cost function of the prediction. i.e. the how far the prediction was from being fully correct
     :return:
     """
+    return label - prediction
 
 
-def minimize_cost():
+def minimize_cost(weights, cost, learn_rate, label):
     """
     Initiate back propagation; Change the weights connected to the perceptron according to stochastic gradient descent
     :return:
     """
+    for i in range(len(weights)):
+        weights[i] = weights[i] + learn_rate * cost * label
+    return weights
 
 
 def main(file):
     imgs, labels = prep_data(file)
-    features = construct_features(10, 10, 50)
+    features = construct_features(10, 10, 51)
     imgs = feature_values(features, imgs)
     weights = initialize_weights()
     correct = 0
@@ -144,10 +148,8 @@ def main(file):
         for i in range(100):
             guess = feed_forward(imgs[i], weights, None, None)
             if guess != labels[i]:
-                if guess == 0:
-                    correct = correct
-                else:
-                    correct = correct
+                cost = calculate_cost(labels[i], guess)
+                minimize_cost(weights, cost, 0.01, labels[i])
             else:
                 correct += 1
         print(epoch, correct)
