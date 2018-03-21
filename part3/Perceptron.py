@@ -149,5 +149,5 @@ def main(file):
 
 
 if __name__ == '__main__':
-    filename = 'ass1-data/part3/image.data'
+    filename = '../ass1-data/part3/image.data'
     main(filename)

@@ -1,0 +1,9 @@
+1. The perceptron did find the correct weights, and it does so at variable cycles. This is because the features, being
+dynamically randomised at the start of runtime, are always changing and therefore will influence the correct weights
+to achieve 100% accuracy (in the scope of the training set). So far, however, it has always taken less than 500 epochs
+to converge the weights
+
+2. It is not a good measure of performance since it will be overexposed to the training set and be overfitted to it. It
+is better to create a test set that it hasn't seen before and measure its accuracy on that, since it will better simulate
+the real world and will also give a more reliable measure of accuracy, since it is not guessing on pre-exposed pieces of
+data.

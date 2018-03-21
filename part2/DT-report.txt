@@ -1,0 +1,61 @@
+2 = TRUE
+   CLASS:  live , CHANCE:  1
+ 2  = FALSE
+   4 = TRUE
+     12 = TRUE
+       5 = TRUE
+         8 = TRUE
+           10 = TRUE
+             15 = TRUE
+               CLASS:  live , CHANCE:  1
+             15  = FALSE
+               13 = TRUE
+                 11 = TRUE
+                   9 = TRUE
+                     CLASS:  live , CHANCE:  1
+                   9  = FALSE
+                     CLASS:  die , CHANCE:  1
+                 11  = FALSE
+                   CLASS:  live , CHANCE:  1
+               13  = FALSE
+                 CLASS:  die , CHANCE:  1
+           10  = FALSE
+             CLASS:  live , CHANCE:  1
+         8  = FALSE
+           CLASS:  live , CHANCE:  1
+       5  = FALSE
+         14 = TRUE
+           7 = TRUE
+             6 = TRUE
+               3 = TRUE
+                 1 = TRUE
+                   16 = TRUE
+                     CLASS:  live , CHANCE:  1
+                   16  = FALSE
+                     CLASS:  die , CHANCE:  0.5
+                 1  = FALSE
+                   CLASS:  die , CHANCE:  0.5
+               3  = FALSE
+                 CLASS:  live , CHANCE:  1
+             6  = FALSE
+               CLASS:  die , CHANCE:  0.6
+           7  = FALSE
+             CLASS:  live , CHANCE:  0.7777777777777778
+         14  = FALSE
+           CLASS:  live , CHANCE:  0.8571428571428571
+     12  = FALSE
+       CLASS:  die , CHANCE:  0.75
+   4  = FALSE
+     CLASS:  live , CHANCE:  0.875
+
+23 / 27 GUESSED CORRECTLY
+0.8518518518518519 ACCURACY
+
+compared to .8 accuracy using purely the baseline, the accuracy using the DT model increased a good bit. I believe
+since the vast majority of datasets classified as live, the DT wouldn't be able to predict significantly better in
+comparison
+
+3. You could prune leaves by finding leaves whose probability of guessing correctly is not high, and remove that section.
+this could decrease the accuracy of training since it would lose a leaf in which some of its data pieces may reside in,
+but could improve the accuracy of the test sets since the tree wont be overfitted to the training set, therefore being
+more generally applicable in various pieces of data.

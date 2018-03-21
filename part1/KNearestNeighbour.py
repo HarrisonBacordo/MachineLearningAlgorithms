@@ -77,6 +77,6 @@ def main(train, test):
 
 
 if __name__ == '__main__':
-    train_file = 'ass1-data/part1/iris-training.txt'
-    test_file = 'ass1-data/part1/iris-test.txt'
+    train_file = '../ass1-data/part1/iris-training.txt'
+    test_file = '../ass1-data/part1/iris-test.txt'
     main(train_file, test_file)
