@@ -60,7 +60,7 @@ def prep_data(file):
         imgs.append(px)
     # convert "yes" and "otherwise" into 1 and -1 respectively
     for i in range(len(labels)):
-        if labels[i] == "Yes":
+        if labels[i] == "X":
             labels[i] = 1
         else:
             labels[i] = -1
@@ -91,8 +91,8 @@ def feature_values(feats, imgs):
     :param imgs: images in binary
     :return: list of all feature values for each img
     """
-    img_bools = list()
-    all_img_bools = list()
+    img_features = list()
+    all_img_features = list()
     for img in imgs:
         for i, f in enumerate(feats):
             total = 0
@@ -100,13 +100,13 @@ def feature_values(feats, imgs):
                 if int(img[f.row[j], f.col[j]]) == f.connected[j]:
                     total += 1
             if total >= 3 or i == 50:   # check if dummy variable or if sum > 3
-                img_bools.append(1)
+                img_features.append(1)
             else:
-                img_bools.append(0)
-        all_img_bools.append(img_bools)  # add feature values to list of feature values
-        img_bools = list()
-    all_img_bools = np.array(all_img_bools)  # convert to numpy array
-    return all_img_bools
+                img_features.append(0)
+        all_img_features.append(img_features)  # add feature values to list of feature values
+        img_features = list()
+    all_img_features = np.array(all_img_features)  # convert to numpy array
+    return all_img_features
 
 
 def feed_forward(features, weights):
@@ -147,10 +147,6 @@ def main(file):
     for i, feature in enumerate(features):
         print("\nFEATURE ", i, "\nROW: ", feature.row, "\nCOL: ", feature.col, "\nBOOLS: ", feature.connected)
 
-#     while cost is still higher than some number
-#       feed forward training data
-#       calculate cost of prediction
-#       minimize cost via gradient descent
 
 if __name__ == '__main__':
     filename = 'ass1-data/part3/image.data'
