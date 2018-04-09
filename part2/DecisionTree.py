@@ -84,8 +84,10 @@ def classify_instance(instance, tree):
     """
     if isinstance(tree, Leaf):
         if instance[0] == tree.clas:
+            print("CORRECT: ", instance)
             return 1
         else:
+            print("INCORRECT: ", instance)
             return 0
     else:
         if instance[tree.attr] == 'true':
@@ -94,7 +96,7 @@ def classify_instance(instance, tree):
             return classify_instance(instance, tree.right)
 
 
-def compute_purity(instances):
+def compute_impurity(instances):
     """
     calculates the purity of the given list of instances
     :param instances: instances to compute purity on
@@ -103,9 +105,10 @@ def compute_purity(instances):
     live, die = split_instances(0, instances)
     if not instances:
         return 0
+    ttt = 2 * (len(live) * len(die))/pow(len(live) + len(die), 2)
     if len(live) > len(die):
         return len(live)/len(instances)
-    return len(die)/len(instances)
+    return ttt
 
 
 def split_instances(attr, instances):
@@ -157,7 +160,7 @@ def build_tree(instances, attr, baseline):
             clas = "live"
         else:
             clas = "die"
-        return Leaf(clas, compute_purity(instances))
+        return Leaf(clas, compute_impurity(instances))
     # we choose 1 since the classification of the instance counts as a column in the dataset.
     elif len(attr) != 1:
         top_avg = None
@@ -169,7 +172,10 @@ def build_tree(instances, attr, baseline):
         for a in attr:
             if a != 0:
                 true_set, false_set = split_instances(a, instances)
-                avg = (compute_purity(true_set) + compute_purity(false_set)) / 2
+                weighttrue = len(true_set) / len(instances)
+                weightfalse = len(false_set) / len(instances)
+                avg = 1 - (((compute_impurity(true_set) * weighttrue) + (compute_impurity(false_set) * weightfalse))/2)
+
                 if not best_true or not top_avg or avg > top_avg:
                     top_avg = avg
                     best_attr = a
@@ -177,8 +183,8 @@ def build_tree(instances, attr, baseline):
                     best_false = false_set
         # remove best attribute from attr list, constuct a node with best attribute. continue recursion of build_tree
         attr.remove(best_attr)
-        left = build_tree(best_true, attr, baseline)
-        right = build_tree(best_false, attr, baseline)
+        left = build_tree(best_true, attr[:], baseline)
+        right = build_tree(best_false, attr[:], baseline)
         return Node(best_attr, left, right)
 
 
@@ -190,7 +196,7 @@ def main(file1, file2):
         baseline = "live"
     else:
         baseline = "die"
-    chance = compute_purity(train_instances)
+    chance = compute_impurity(train_instances)
     # construct the tree with the training set. Print it afterward
     tree = build_tree(train_instances, attr, Leaf(baseline, chance))
     tree.report("")
@@ -205,14 +211,14 @@ def main(file1, file2):
 
 if __name__ == '__main__':
     main('../ass1-data/part2/hepatitis-training.dat', '../ass1-data/part2/hepatitis-test.dat')
-    for i in range(1, 10):
-        if i == 10:
-            print("\n\nSET", i)
-            train = f'../ass1-data/part2/hepatitis-training-run{i}.dat'
-            test = f'../ass1-data/part2/hepatitis-test-run{i}.dat'
-            main(train, test)
-        else:
-            print("\n\nSET", i)
-            train = f'../ass1-data/part2/hepatitis-training-run0{i}.dat'
-            test = f'../ass1-data/part2/hepatitis-test-run0{i}.dat'
-            main(train, test)
+    # for i in range(1, 10):
+    #     if i == 10:
+    #         print("\n\nSET", i)
+    #         train = f'../ass1-data/part2/hepatitis-training-run{i}.dat'
+    #         test = f'../ass1-data/part2/hepatitis-test-run{i}.dat'
+    #         main(train, test)
+    #     else:
+    #         print("\n\nSET", i)
+    #         train = f'../ass1-data/part2/hepatitis-training-run0{i}.dat'
+    #         test = f'../ass1-data/part2/hepatitis-test-run0{i}.dat'
+    #         main(train, test)

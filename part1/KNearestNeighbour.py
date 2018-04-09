@@ -2,6 +2,8 @@ import csv
 import math
 import numpy as np
 
+ranges = list()
+
 
 def prep_data(training, test):
     """
@@ -31,7 +33,7 @@ def dist(v1, v2, length):
     if not v1 or not v2:
         return
     for x in range(length):
-        distance += pow((float(v1[0][5 * x:5 * x + 3]) - float(v2[0][5 * x:5 * x + 3])), 2)
+        distance += pow((float(v1[0][5 * x:5 * x + 3]) - float(v2[0][5 * x:5 * x + 3])), 2) / pow(ranges[x], 2)
     return math.sqrt(distance)
 
 
@@ -43,7 +45,8 @@ def eval_neighbours(v, data, k):
     :param k: number of neighbours to calculate
     :return: list of neighbours
     """
-    dist_list = []
+    dist_list = list()
+
     for v2 in data:
         distance = dist(v, v2, 4)
         if distance is not None:
@@ -69,8 +72,23 @@ def predict(neighbours):
 def main(train, test):
     training_data, test_data = prep_data(train, test)
     i = 1
+    a1 = list()
+    a2 = list()
+    a3 = list()
+    a4 = list()
+    for instance in training_data:
+        if instance:
+            a1.append(float(instance[0][0:3]))
+            a2.append(float(instance[0][3:6]))
+            a3.append(float(instance[0][6:9]))
+            a4.append(float(instance[0][9:12]))
+    ranges.append(round(max(a1) - min(a1), 2))
+    ranges.append(round(max(a2) - min(a2), 2))
+    ranges.append(round(max(a3) - min(a3), 2))
+    ranges.append(round(max(a4) - min(a4), 2))
+
     for row in test_data:
-        neighbours = eval_neighbours(row, training_data, 5)
+        neighbours = eval_neighbours(row, training_data, 3)
         if neighbours:
             print(i, predict(neighbours))
             i += 1
