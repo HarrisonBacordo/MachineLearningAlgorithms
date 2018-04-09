@@ -22,14 +22,14 @@ class Node:
 
 
 class Leaf:
-    def __init__(self, clas, chance):
+    def __init__(self, _class, chance):
         """
         Represents the end of a branch; part of a tree with neither a left or right branch. Holds a classification and
         a possibility of that classification being true
-        :param clas: classification this leaf represents
+        :param _class: classification this leaf represents
         :param chance: probability that this classification is correct
         """
-        self.clas = clas
+        self.clas = _class
         self.chance = chance
 
     def report(self, indent):
@@ -47,7 +47,7 @@ def prep_data(training, test):
     train_instances = list()
     test_instances = list()
     # remove trailing whitespaces. insert a class column into the dataset for the live/die classification
-    content = [i.strip().split() for i in open(training).readlines()]
+    content = [j.strip().split() for j in open(training).readlines()]
     content[1].insert(0, "CLASS")
     # convert to csv file for easier read
     with open("train.csv", 'wt') as csv_file:
@@ -165,7 +165,7 @@ def build_tree(instances, attr, baseline):
         best_true = None
         best_false = None
         # cycle through attributes, get their purity for both true or false sides of attribute. determine which
-        # is most significan(most pure on average b/t true and false sets)
+        # is most significant (most pure on average b/t true and false sets)
         for a in attr:
             if a != 0:
                 true_set, false_set = split_instances(a, instances)
@@ -205,10 +205,14 @@ def main(file1, file2):
 
 if __name__ == '__main__':
     main('../ass1-data/part2/hepatitis-training.dat', '../ass1-data/part2/hepatitis-test.dat')
-    # for i in range(1, 10):
-    #     if i == 10:
-    #         main(('../ass1-data/part2/hepatitis-training-run', i, '.dat'),
-    #              ('../ass1-data/part2/hepatitis-test-run', i, '.dat'))
-    #     else:
-    #         main(('../ass1-data/part2/hepatitis-training-run0', i, '.dat'),
-    #              ('../ass1-data/part2/hepatitis-test-run0', i, '.dat'))
+    for i in range(1, 10):
+        if i == 10:
+            print("\n\nSET", i)
+            train = f'../ass1-data/part2/hepatitis-training-run{i}.dat'
+            test = f'../ass1-data/part2/hepatitis-test-run{i}.dat'
+            main(train, test)
+        else:
+            print("\n\nSET", i)
+            train = f'../ass1-data/part2/hepatitis-training-run0{i}.dat'
+            test = f'../ass1-data/part2/hepatitis-test-run0{i}.dat'
+            main(train, test)
