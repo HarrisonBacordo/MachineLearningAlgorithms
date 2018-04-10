@@ -1,5 +1,7 @@
 import csv
 
+global attributes
+
 
 class Node:
 
@@ -15,9 +17,9 @@ class Node:
         self.right = right
 
     def report(self, indent):
-        print(indent, self.attr, "= TRUE")
+        print(indent, attributes[self.attr], "= TRUE")
         self.left.report(indent.join("  "))
-        print(indent, self.attr, " = FALSE")
+        print(indent, attributes[self.attr], " = FALSE")
         self.right.report(indent + "  ")
 
 
@@ -43,6 +45,7 @@ def prep_data(training, test):
     :param test: set of test data
     :return: list of instances and and attributes for both training and test
     """
+    attrnum = list()
     attr = list()
     train_instances = list()
     test_instances = list()
@@ -56,8 +59,9 @@ def prep_data(training, test):
             if i > 0:
                 # attribute; add this row's indices to the attribute list
                 if i == 1:
-                    for j in range(len(content[i])):
-                        attr.append(j)
+                    for j, attribute in enumerate(content[i]):
+                        attrnum.append(j)
+                        attr.append(attribute)
                 else:
                     train_instances.append(content[i])
                 writer.writerow(content[i])
@@ -71,8 +75,7 @@ def prep_data(training, test):
                 if i != 1:
                     test_instances.append(content[i])
                 writer.writerow(content[i])
-
-    return train_instances, test_instances, attr
+    return train_instances, test_instances, attrnum, attr
 
 
 def classify_instance(instance, tree):
@@ -106,8 +109,6 @@ def compute_impurity(instances):
     if not instances:
         return 0
     ttt = 2 * (len(live) * len(die))/pow(len(live) + len(die), 2)
-    if len(live) > len(die):
-        return len(live)/len(instances)
     return ttt
 
 
@@ -189,7 +190,8 @@ def build_tree(instances, attr, baseline):
 
 
 def main(file1, file2):
-    train_instances, test_instances, attr = prep_data(file1, file2)
+    global attributes
+    train_instances, test_instances, attrnum, attributes = prep_data(file1, file2)
     # determine baseline and chance of baseline of dataset
     live, die = split_instances(0, train_instances)
     if len(live) > len(die):
@@ -198,27 +200,27 @@ def main(file1, file2):
         baseline = "die"
     chance = compute_impurity(train_instances)
     # construct the tree with the training set. Print it afterward
-    tree = build_tree(train_instances, attr, Leaf(baseline, chance))
+    tree = build_tree(train_instances, attrnum, Leaf(baseline, chance))
     tree.report("")
     # test and get score of accuracy against test instances.
     i = 0
     for instance in test_instances:
         i += classify_instance(instance, tree)
-    percentage = i / len(test_instances)
+    percentage = round(i / len(test_instances) * 100, 2)
     print(i, "/", len(test_instances))
     print(percentage)
 
 
 if __name__ == '__main__':
     main('../ass1-data/part2/hepatitis-training.dat', '../ass1-data/part2/hepatitis-test.dat')
-    # for i in range(1, 10):
-    #     if i == 10:
-    #         print("\n\nSET", i)
-    #         train = f'../ass1-data/part2/hepatitis-training-run{i}.dat'
-    #         test = f'../ass1-data/part2/hepatitis-test-run{i}.dat'
-    #         main(train, test)
-    #     else:
-    #         print("\n\nSET", i)
-    #         train = f'../ass1-data/part2/hepatitis-training-run0{i}.dat'
-    #         test = f'../ass1-data/part2/hepatitis-test-run0{i}.dat'
-    #         main(train, test)
+    for i in range(1, 10):
+        if i == 10:
+            print("\n\nSET", i)
+            train = f'../ass1-data/part2/hepatitis-training-run{i}.dat'
+            test = f'../ass1-data/part2/hepatitis-test-run{i}.dat'
+            main(train, test)
+        else:
+            print("\n\nSET", i)
+            train = f'../ass1-data/part2/hepatitis-training-run0{i}.dat'
+            test = f'../ass1-data/part2/hepatitis-test-run0{i}.dat'
+            main(train, test)

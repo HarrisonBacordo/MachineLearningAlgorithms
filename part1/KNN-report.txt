@@ -1,5 +1,6 @@
 1. CLASS LABELS FOR K = 1:
-ACCURACY: 94.7%
+FOR K = 1, 68/75, 90.67%
+0 Iris-setosa
 1 Iris-setosa
 2 Iris-setosa
 3 Iris-setosa
@@ -24,7 +25,87 @@ ACCURACY: 94.7%
 22 Iris-setosa
 23 Iris-setosa
 24 Iris-setosa
-25 Iris-setosa
+25 Iris-versicolor
+26 Iris-versicolor
+27 Iris-virginica
+28 Iris-versicolor
+29 Iris-versicolor
+30 Iris-versicolor
+31 Iris-versicolor
+32 Iris-versicolor
+33 Iris-virginica
+34 Iris-versicolor
+35 Iris-versicolor
+36 Iris-versicolor
+37 Iris-versicolor
+38 Iris-versicolor
+39 Iris-versicolor
+40 Iris-versicolor
+41 Iris-versicolor
+42 Iris-versicolor
+43 Iris-versicolor
+44 Iris-versicolor
+45 Iris-versicolor
+46 Iris-versicolor
+47 Iris-versicolor
+48 Iris-versicolor
+49 Iris-versicolor
+50 Iris-virginica
+51 Iris-virginica
+52 Iris-versicolor
+53 Iris-virginica
+54 Iris-virginica
+55 Iris-virginica
+56 Iris-virginica
+57 Iris-virginica
+58 Iris-versicolor
+59 Iris-versicolor
+60 Iris-virginica
+61 Iris-virginica
+62 Iris-virginica
+63 Iris-versicolor
+64 Iris-virginica
+65 Iris-virginica
+66 Iris-virginica
+67 Iris-virginica
+68 Iris-virginica
+69 Iris-virginica
+70 Iris-virginica
+71 Iris-virginica
+72 Iris-virginica
+73 Iris-virginica
+74 Iris-versicolor
+FOR K = 1, 68/75
+
+
+2. CLASS LABELS FOR K = 3:
+FOR K = 3, 72/75, 96.0%
+0 Iris-setosa
+1 Iris-setosa
+2 Iris-setosa
+3 Iris-setosa
+4 Iris-setosa
+5 Iris-setosa
+6 Iris-setosa
+7 Iris-setosa
+8 Iris-setosa
+9 Iris-setosa
+10 Iris-setosa
+11 Iris-setosa
+12 Iris-setosa
+13 Iris-setosa
+14 Iris-setosa
+15 Iris-setosa
+16 Iris-setosa
+17 Iris-setosa
+18 Iris-setosa
+19 Iris-setosa
+20 Iris-setosa
+21 Iris-setosa
+22 Iris-setosa
+23 Iris-setosa
+24 Iris-setosa
+25 Iris-versicolor
 26 Iris-versicolor
 27 Iris-versicolor
 28 Iris-versicolor
@@ -32,8 +113,8 @@ ACCURACY: 94.7%
 30 Iris-versicolor
 31 Iris-versicolor
 32 Iris-versicolor
-33 Iris-versicolor
-34 Iris-virginica
+33 Iris-virginica
+34 Iris-versicolor
 35 Iris-versicolor
 36 Iris-versicolor
 37 Iris-versicolor
@@ -49,21 +130,21 @@ ACCURACY: 94.7%
 47 Iris-versicolor
 48 Iris-versicolor
 49 Iris-versicolor
-50 Iris-versicolor
+50 Iris-virginica
 51 Iris-virginica
 52 Iris-virginica
-53 Iris-versicolor
+53 Iris-virginica
 54 Iris-virginica
 55 Iris-virginica
 56 Iris-virginica
 57 Iris-virginica
-58 Iris-virginica
+58 Iris-versicolor
 59 Iris-versicolor
 60 Iris-virginica
 61 Iris-virginica
 62 Iris-virginica
 63 Iris-virginica
-64 Iris-versicolor
+64 Iris-virginica
 65 Iris-virginica
 66 Iris-virginica
 67 Iris-virginica
@@ -74,89 +155,9 @@ ACCURACY: 94.7%
 72 Iris-virginica
 73 Iris-virginica
 74 Iris-virginica
-75 Iris-virginica
 
-
-2. CLASS LABELS FOR K = 3:
-ACCURACY: 94.7%
-1 Iris-setosa
-2 Iris-setosa
-3 Iris-setosa
-4 Iris-setosa
-5 Iris-setosa
-6 Iris-setosa
-7 Iris-setosa
-8 Iris-setosa
-9 Iris-setosa
-10 Iris-setosa
-11 Iris-setosa
-12 Iris-setosa
-13 Iris-setosa
-14 Iris-setosa
-15 Iris-setosa
-16 Iris-setosa
-17 Iris-setosa
-18 Iris-setosa
-19 Iris-setosa
-20 Iris-setosa
-21 Iris-setosa
-22 Iris-setosa
-23 Iris-setosa
-24 Iris-setosa
-25 Iris-setosa
-26 Iris-versicolor
-27 Iris-versicolor
-28 Iris-virginica
-29 Iris-versicolor
-30 Iris-versicolor
-31 Iris-versicolor
-32 Iris-versicolor
-33 Iris-versicolor
-34 Iris-virginica
-35 Iris-versicolor
-36 Iris-versicolor
-37 Iris-versicolor
-38 Iris-versicolor
-39 Iris-versicolor
-40 Iris-versicolor
-41 Iris-versicolor
-42 Iris-versicolor
-43 Iris-versicolor
-44 Iris-versicolor
-45 Iris-versicolor
-46 Iris-versicolor
-47 Iris-versicolor
-48 Iris-versicolor
-49 Iris-versicolor
-50 Iris-versicolor
-51 Iris-virginica
-52 Iris-versicolor
-53 Iris-versicolor
-54 Iris-virginica
-55 Iris-virginica
-56 Iris-virginica
-57 Iris-virginica
-58 Iris-virginica
-59 Iris-versicolor
-60 Iris-virginica
-61 Iris-virginica
-62 Iris-virginica
-63 Iris-virginica
-64 Iris-versicolor
-65 Iris-virginica
-66 Iris-virginica
-67 Iris-virginica
-68 Iris-virginica
-69 Iris-virginica
-70 Iris-virginica
-71 Iris-virginica
-72 Iris-virginica
-73 Iris-virginica
-74 Iris-virginica
-75 Iris-virginica
-
-The k = 1 model performed better than the k = 3 model. This may be due to instances that are near the classifier line
-between two different classes, leading it to potentially pick up more neighbours of the wrong class.
+The k = 3 model performed better than the k = 1 model. This is because instances near the classifier line (near outliers)
+will have more options to find neighbours, which increases accuracy
 
 3. The main advantages of k-nearest neighbour is that it can remain very accurate in cases with multiple classes (versus
 a linear regression model). It is also quite simple to understand and implement yourself. Some disadvantages include the

@@ -6,4 +6,5 @@ to converge the weights
 2. It is not a good measure of performance since it will be overexposed to the training set and be overfitted to it. It
 is better to create a test set that it hasn't seen before and measure its accuracy on that, since it will better simulate
 the real world and will also give a more reliable measure of accuracy, since it is not guessing on pre-exposed pieces of
-data.
+data. Another flaw with the training dataset is that it isn't shuffled, so all of instances of label X occur the in the
+first half of the dataset, then all instances of label O occur in the second half.

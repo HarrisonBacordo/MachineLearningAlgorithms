@@ -1,61 +1,109 @@
-2 = TRUE
-   CLASS:  live , CHANCE:  1
- 2  = FALSE
-   4 = TRUE
-     12 = TRUE
-       5 = TRUE
-         8 = TRUE
-           10 = TRUE
-             15 = TRUE
-               CLASS:  live , CHANCE:  1
-             15  = FALSE
-               13 = TRUE
-                 11 = TRUE
-                   9 = TRUE
-                     CLASS:  live , CHANCE:  1
-                   9  = FALSE
-                     CLASS:  die , CHANCE:  1
-                 11  = FALSE
-                   CLASS:  live , CHANCE:  1
-               13  = FALSE
-                 CLASS:  die , CHANCE:  1
-           10  = FALSE
-             CLASS:  live , CHANCE:  1
-         8  = FALSE
-           CLASS:  live , CHANCE:  1
-       5  = FALSE
-         14 = TRUE
-           7 = TRUE
-             6 = TRUE
-               3 = TRUE
-                 1 = TRUE
-                   16 = TRUE
-                     CLASS:  live , CHANCE:  1
-                   16  = FALSE
-                     CLASS:  die , CHANCE:  0.5
-                 1  = FALSE
-                   CLASS:  die , CHANCE:  0.5
-               3  = FALSE
-                 CLASS:  live , CHANCE:  1
-             6  = FALSE
-               CLASS:  die , CHANCE:  0.6
-           7  = FALSE
-             CLASS:  live , CHANCE:  0.7777777777777778
-         14  = FALSE
-           CLASS:  live , CHANCE:  0.8571428571428571
-     12  = FALSE
-       CLASS:  die , CHANCE:  0.75
-   4  = FALSE
-     CLASS:  live , CHANCE:  0.875
+ ASCITES = TRUE
+   SPIDERS = TRUE
+     VARICES = TRUE
+       FIRMLIVER = TRUE
+         CLASS:  live , PROB:  1
+       FIRMLIVER  = FALSE
+         BIGLIVER = TRUE
+           STEROID = TRUE
+             CLASS:  live , PROB:  1
+           STEROID  = FALSE
+             FEMALE = TRUE
+               CLASS:  live , PROB:  1
+             FEMALE  = FALSE
+               ANTIVIRALS = TRUE
+                 FATIGUE = TRUE
+                   CLASS:  die , PROB:  1
+                 FATIGUE  = FALSE
+                   CLASS:  live , PROB:  1
+               ANTIVIRALS  = FALSE
+                 CLASS:  die , PROB:  1
+         BIGLIVER  = FALSE
+           CLASS:  live , PROB:  1
+     VARICES  = FALSE
+       CLASS:  die , PROB:  1
+   SPIDERS  = FALSE
+     FIRMLIVER = TRUE
+       AGE = TRUE
+         CLASS:  live , PROB:  1
+       AGE  = FALSE
+         SGOT = TRUE
+           CLASS:  live , PROB:  1
+         SGOT  = FALSE
+           ANTIVIRALS = TRUE
+             CLASS:  die , PROB:  1
+           ANTIVIRALS  = FALSE
+             STEROID = TRUE
+               CLASS:  live , PROB:  1
+             STEROID  = FALSE
+               CLASS:  die , PROB:  1
+     FIRMLIVER  = FALSE
+       SGOT = TRUE
+         BIGLIVER = TRUE
+           SPLEENPALPABLE = TRUE
+             CLASS:  live , PROB:  1
+           SPLEENPALPABLE  = FALSE
+             ANOREXIA = TRUE
+               CLASS:  die , PROB:  1
+             ANOREXIA  = FALSE
+               CLASS:  live , PROB:  1
+         BIGLIVER  = FALSE
+           CLASS:  die , PROB:  1
+       SGOT  = FALSE
+         CLASS:  live , PROB:  1
+ ASCITES  = FALSE
+   BIGLIVER = TRUE
+     STEROID = TRUE
+       CLASS:  die , PROB:  1
+     STEROID  = FALSE
+       ANOREXIA = TRUE
+         CLASS:  die , PROB:  1
+       ANOREXIA  = FALSE
+         CLASS:  live , PROB:  1
+   BIGLIVER  = FALSE
+     CLASS:  live , PROB:  1
+CORRECT:  ['live', 'false', 'false', 'true', 'true', 'true', 'true', 'true', 'true', 'false', 'false', 'true', 'true', 'true', 'false', 'false', 'true']
+CORRECT:  ['live', 'false', 'false', 'true', 'true', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'true', 'true', 'true', 'false', 'false']
+CORRECT:  ['live', 'false', 'false', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'false', 'false', 'true']
+CORRECT:  ['live', 'true', 'false', 'false', 'true', 'false', 'true', 'true', 'false', 'false', 'true', 'true', 'true', 'true', 'true', 'false', 'false']
+CORRECT:  ['live', 'false', 'false', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'false', 'false', 'false']
+INCORRECT:  ['die', 'false', 'false', 'false', 'true', 'false', 'false', 'false', 'true', 'true', 'false', 'true', 'true', 'true', 'true', 'true', 'true']
+CORRECT:  ['live', 'true', 'false', 'false', 'true', 'false', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'false', 'false', 'false']
+CORRECT:  ['live', 'true', 'false', 'true', 'true', 'false', 'true', 'true', 'false', 'false', 'true', 'true', 'true', 'true', 'true', 'false', 'true']
+CORRECT:  ['live', 'false', 'false', 'false', 'true', 'false', 'true', 'true', 'true', 'false', 'true', 'true', 'true', 'true', 'false', 'true', 'false']
+CORRECT:  ['live', 'false', 'false', 'true', 'true', 'false', 'true', 'true', 'true', 'false', 'true', 'true', 'true', 'true', 'true', 'true', 'false']
+INCORRECT:  ['die', 'false', 'false', 'false', 'true', 'false', 'false', 'false', 'true', 'false', 'true', 'false', 'false', 'false', 'true', 'false', 'true']
+CORRECT:  ['live', 'false', 'false', 'false', 'true', 'false', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true']
+CORRECT:  ['die', 'true', 'false', 'false', 'true', 'false', 'false', 'true', 'true', 'true', 'true', 'false', 'false', 'true', 'true', 'false', 'true']
+CORRECT:  ['live', 'true', 'false', 'false', 'true', 'false', 'false', 'true', 'false', 'false', 'true', 'false', 'true', 'true', 'false', 'false', 'true']
+CORRECT:  ['die', 'false', 'false', 'true', 'true', 'false', 'false', 'false', 'true', 'false', 'true', 'false', 'false', 'false', 'true', 'false', 'true']
+CORRECT:  ['live', 'false', 'false', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'false']
+INCORRECT:  ['live', 'true', 'true', 'false', 'true', 'false', 'true', 'true', 'false', 'false', 'false', 'false', 'true', 'true', 'false', 'true', 'true']
+CORRECT:  ['live', 'false', 'true', 'false', 'true', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'true', 'true', 'true', 'false', 'false']
+CORRECT:  ['live', 'false', 'false', 'false', 'true', 'false', 'false', 'true', 'true', 'false', 'true', 'false', 'true', 'true', 'false', 'true', 'true']
+CORRECT:  ['live', 'false', 'false', 'true', 'true', 'false', 'false', 'false', 'true', 'true', 'true', 'true', 'true', 'true', 'false', 'false', 'false']
+CORRECT:  ['live', 'false', 'false', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'false', 'false', 'true']
+INCORRECT:  ['live', 'false', 'false', 'true', 'true', 'false', 'false', 'false', 'true', 'true', 'true', 'false', 'true', 'false', 'true', 'false', 'false']
+CORRECT:  ['live', 'true', 'false', 'false', 'false', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'false', 'false', 'false']
+INCORRECT:  ['live', 'true', 'false', 'true', 'true', 'false', 'false', 'true', 'true', 'false', 'false', 'false', 'false', 'true', 'false', 'false', 'true']
+CORRECT:  ['live', 'false', 'false', 'true', 'false', 'false', 'true', 'true', 'true', 'false', 'false', 'true', 'true', 'true', 'true', 'false', 'false']
+CORRECT:  ['live', 'false', 'false', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'false', 'false', 'false']
+INCORRECT:  ['live', 'true', 'false', 'false', 'true', 'false', 'false', 'true', 'true', 'true', 'true', 'true', 'false', 'true', 'true', 'false', 'true']
+21 / 27
+77.78
 
-23 / 27 GUESSED CORRECTLY
-0.8518518518518519 ACCURACY
 
-compared to .8 accuracy using purely the baseline, the accuracy using the DT model increased a good bit. I believe
-since the vast majority of datasets classified as live, the DT wouldn't be able to predict significantly better in
-comparison
+compared to .8 accuracy using purely the baseline, the accuracy using the DT model decreased to about 78%. I believe
+since the vast majority of datasets classified as live (making it a very biased dataset), the DT wasn't able to match
+it's accuracy. it didn't have enough exposure to instances where the label is die, so it was bias toward constantly
+guessing live.
 
 3. You could prune leaves by finding leaves whose probability of guessing correctly is not high, and remove that section.
 this could decrease the accuracy of training since it would lose a leaf in which some of its data pieces may reside in,
 but could improve the accuracy of the test sets since the tree wont be overfitted to the training set, therefore being
 more generally applicable in various pieces of data.
+
+4. Impurity measure isn't good for three or more classes because you lose a lot of information when attempting to do a
+binary tree with three classes. Because of this, you will have some nodes containing 2 or more classes, where calculating
+impurity for a node with two or more classes will lose a lot of information. You would need to move to an information
+gain algorithm instead of an impurity algorithm.

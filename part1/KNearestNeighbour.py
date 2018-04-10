@@ -71,27 +71,32 @@ def predict(neighbours):
 
 def main(train, test):
     training_data, test_data = prep_data(train, test)
-    i = 1
     a1 = list()
     a2 = list()
     a3 = list()
     a4 = list()
+    label = list()
     for instance in training_data:
         if instance:
             a1.append(float(instance[0][0:3]))
-            a2.append(float(instance[0][3:6]))
-            a3.append(float(instance[0][6:9]))
-            a4.append(float(instance[0][9:12]))
+            a2.append(float(instance[0][5:8]))
+            a3.append(float(instance[0][10:13]))
+            a4.append(float(instance[0][15:18]))
+            label.append(instance[0][20:])
     ranges.append(round(max(a1) - min(a1), 2))
     ranges.append(round(max(a2) - min(a2), 2))
     ranges.append(round(max(a3) - min(a3), 2))
     ranges.append(round(max(a4) - min(a4), 2))
 
-    for row in test_data:
-        neighbours = eval_neighbours(row, training_data, 3)
+    correct = 0
+    k = 3
+    for i, row in enumerate(test_data):
+        neighbours = eval_neighbours(row, training_data, k)
         if neighbours:
+            if predict(neighbours) == label[i]:
+                correct += 1
             print(i, predict(neighbours))
-            i += 1
+    print(f'FOR K = {k}, {correct}/75, {round(correct/75 * 100, 2)}%')
 
 
 if __name__ == '__main__':
