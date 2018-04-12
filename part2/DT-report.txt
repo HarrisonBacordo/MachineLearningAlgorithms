@@ -98,6 +98,8 @@ since the vast majority of datasets classified as live (making it a very biased 
 it's accuracy. it didn't have enough exposure to instances where the label is die, so it was bias toward constantly
 guessing live.
 
+2. K cross validation is implemented when script is run; see results by running the script.
+
 3. You could prune leaves by finding leaves whose probability of guessing correctly is not high, and remove that section.
 this could decrease the accuracy of training since it would lose a leaf in which some of its data pieces may reside in,
 but could improve the accuracy of the test sets since the tree wont be overfitted to the training set, therefore being
